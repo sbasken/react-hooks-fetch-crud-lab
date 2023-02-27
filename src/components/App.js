@@ -7,7 +7,23 @@ function App() {
   const [ page, setPage ] = useState("List");
   const [ questions, setQuestions ] = useState([])
 
-  const handleAddQuestions = (newQuestion) => {
+  const handleUpdateQuestion = (updatedQuestion) => {
+    const updatedQuestions = questions.map( question => {
+      if (question.id === updatedQuestion.id) {
+        return updatedQuestion
+      } else {
+        return question
+      }
+    })
+    setQuestions(updatedQuestions)
+  }
+
+  const handleDeleteQuestion = (id) => {
+    const updatedQuestions = questions.filter( question => question.id !== id)
+    setQuestions(updatedQuestions)
+  }
+
+  const handleAddQuestion = (newQuestion) => {
     setQuestions([...questions, newQuestion])
   }
 
@@ -20,7 +36,7 @@ function App() {
   return (
     <main>
       <AdminNavBar onChangePage={setPage} />
-      {page === "Form" ? <QuestionForm onAddQuestions={handleAddQuestions} /> : <QuestionList questions={questions}/>}
+      {page === "Form" ? <QuestionForm onAddQuestion={handleAddQuestion} /> : <QuestionList questions={questions} onDeleteQuestion={handleDeleteQuestion} onUpdateQuestion={handleUpdateQuestion}/>}
     </main>
   );
 }

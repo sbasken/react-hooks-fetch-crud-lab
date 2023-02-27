@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function QuestionForm({ onAddQuestions }) {
+function QuestionForm({ onAddQuestion }) {
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -32,7 +32,7 @@ function QuestionForm({ onAddQuestions }) {
       },
       body: JSON.stringify(formObj)
     })
-    onAddQuestions(formObj)
+    onAddQuestion(formObj)
   }
 
   return (
